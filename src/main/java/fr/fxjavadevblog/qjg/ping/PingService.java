@@ -13,7 +13,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
  *
  */
 
-@Path("/api/ping/v1")
+@Path("/api/v1/ping")
 public class PingService
 {
     @GET

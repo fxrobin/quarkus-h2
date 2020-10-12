@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Path("/api/v1/video-games")
-@Produces("application/json")
 @Slf4j
 public class VideoGameResource
 {
@@ -27,6 +26,7 @@ public class VideoGameResource
     VideoGameRepository videoGameRepository;
 
     @GET
+    @Produces({"application/json", "application/yaml"})
     @Operation(summary = "Get games", description = "Get all video games on Atari ST")
     @Timed(name = "videogames-find-all", absolute = true, description = "A measure of how long it takes to fetch all video games.", unit = MetricUnits.MILLISECONDS)
     public Iterable<VideoGame> findAll()
@@ -34,5 +34,7 @@ public class VideoGameResource
     	log.info("finAll video-games");
         return videoGameRepository.listAll();
     }
+    
+    
 
 }
