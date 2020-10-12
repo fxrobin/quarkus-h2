@@ -5,7 +5,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 
 import fr.fxjavadevblog.qjg.genre.Genre;
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 
 /**
  * CRUD repository for the VideoGame class. Primary key is a UUID represented by a String.
@@ -17,7 +17,7 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 @ApplicationScoped
 
-public class VideoGameRepository implements PanacheRepository<VideoGame>
+public class VideoGameRepository implements PanacheRepositoryBase<VideoGame, String>
 {
     /**
      * gets every Video Game filtered by the given Genre.

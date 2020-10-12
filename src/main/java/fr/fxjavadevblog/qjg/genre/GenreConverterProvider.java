@@ -14,7 +14,7 @@ import fr.fxjavadevblog.qjg.utils.GenericEnumConverter;
 
 /**
  * JAX-RS provider for Genre conversion. This converter is registered because of
- * the Prodiver annotation.
+ * the Provider annotation.
  * 
  * @author François-Xavier Robin
  */

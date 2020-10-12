@@ -1,5 +1,9 @@
 package fr.fxjavadevblog.qjg.genre;
 
+import java.util.Optional;
+
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -8,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author François-Xavier Robin
  *
  */
+
+@Schema(enumeration = { "arcade", "education", "fighting", "pinball", "plateform", "reflexion", "rpg", "shoot-them-up", "simulation", "sport" })
 public enum Genre {
 	@JsonProperty(value = "arcade")
 	ARCADE,
@@ -38,6 +44,4 @@ public enum Genre {
 
 	@JsonProperty(value = "sport")
 	SPORT;
-
-
 }
