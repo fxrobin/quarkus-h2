@@ -28,7 +28,7 @@ public class VideoGameResource
 {
     
     @Inject
-    private VideoGameRepository videoGameRepository;
+    VideoGameRepository videoGameRepository;
 
     @GET
     @Operation(summary = "Get games", description = "Get all video games on Atari ST")
