@@ -6,5 +6,5 @@ FROM gitpod/workspace-full
 #
 # More information: https://www.gitpod.io/docs/config-docker/
 
-
-RUN brew tap heroku/brew && brew install heroku
+RUN sudo apt install snapd
+RUN sudo snap install --classic heroku
