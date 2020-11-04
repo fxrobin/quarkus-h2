@@ -11,6 +11,7 @@ import javax.ws.rs.QueryParam;
 import org.eclipse.microprofile.metrics.MetricUnits;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import lombok.extern.slf4j.Slf4j;
@@ -31,11 +32,21 @@ public class VideoGameResource
     VideoGameRepository videoGameRepository;
 
     @GET
-    @Operation(summary = "Get games", description = "Get all video games on Atari ST")
+    @Operation(summary = "Get games", 
+               description = "Get all video games on Atari ST. Content negociation can produce application/json and application/yaml")
     @Timed(name = "videogames-find-all", absolute = true, description = "A measure of how long it takes to fetch all video games.", unit = MetricUnits.MILLISECONDS)
-    public Iterable<VideoGame> findAll(@QueryParam(value = "page") @Min(0) @Max(Integer.MAX_VALUE) int page, @QueryParam(value = "size") @Min(2) @Max(200) int size)
+    public Iterable<VideoGame> findAll(
+         @Parameter(description="Page to display starting from 0", required = true)
+         @QueryParam(value = "page") 
+         @Min(0) @Max(Integer.MAX_VALUE) 
+         int page, 
+         
+         @Parameter(description="Number of items to be displayed per page", required = true)
+         @QueryParam(value = "size") 
+         @Min(2) @Max(200)
+         int size)
     {
-    	log.info("finAll video-games");
+    	log.info("findAll video-games");
     	PanacheQuery<VideoGame> livingPersons = videoGameRepository.findAll();
     	return livingPersons.page(page, size).list();
     }
