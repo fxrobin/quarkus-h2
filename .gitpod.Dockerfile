@@ -6,5 +6,6 @@ FROM gitpod/workspace-full
 #
 # More information: https://www.gitpod.io/docs/config-docker/
 
-RUN sudo apt install snapd
+RUN sudo apt-get update \
+    && sudo apt-get install -y snapd
 RUN sudo snap install --classic heroku
