@@ -1,10 +1,16 @@
 package fr.fxjavadevblog.qjg.health;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.temporal.Temporal;
+
 import javax.enterprise.context.ApplicationScoped;
 
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.Liveness;
+
+import fr.fxjavadevblog.qjg.utils.DateTimeUtils;
 
 /**
  * Simple Health Check.
@@ -17,9 +23,20 @@ import org.eclipse.microprofile.health.Liveness;
 @ApplicationScoped
 public class SimpleHealthCheck implements HealthCheck
 {
+	private Instant startTime = Instant.now(); 
+	
     @Override
     public HealthCheckResponse call()
     {
-       return HealthCheckResponse.up("Application");
+       Duration upTime = Duration.between(startTime, Instant.now());
+    	
+       return HealthCheckResponse.named("Application")
+    		   .up()
+    		   .withData("app_name", "API for Atari ST Floppy Catalog")
+    		   .withData("app_version", "1.0")
+    		   .withData("api_version", "v1")
+    		   .withData("started_at", startTime.toString())
+    		   .withData("uptime", DateTimeUtils.format(upTime))
+    		   .build();
     }
 }

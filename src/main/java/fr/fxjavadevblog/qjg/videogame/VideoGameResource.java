@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
 
 import org.eclipse.microprofile.metrics.MetricUnits;
 import org.eclipse.microprofile.metrics.annotation.Timed;
@@ -35,7 +36,7 @@ public class VideoGameResource
     @Operation(summary = "Get games", 
                description = "Get all video games on Atari ST. Content negociation can produce application/json and application/yaml")
     @Timed(name = "videogames-find-all", absolute = true, description = "A measure of how long it takes to fetch all video games.", unit = MetricUnits.MILLISECONDS)
-    public Iterable<VideoGame> findAll(
+    public Response findAll(
          @Parameter(description="Page to display starting from 0", required = true)
          @QueryParam(value = "page") 
          @Min(0) @Max(Integer.MAX_VALUE) 
@@ -47,8 +48,12 @@ public class VideoGameResource
          int size)
     {
     	log.info("findAll video-games");
-    	PanacheQuery<VideoGame> livingPersons = videoGameRepository.findAll();
-    	return livingPersons.page(page, size).list();
+    	PanacheQuery<VideoGame> query = videoGameRepository.findAll();
+  
+    	
+    	return Response.status(Response.Status.OK)
+    				   .entity(query.page(page, size).list())
+    				   .build();
     }
     
     
