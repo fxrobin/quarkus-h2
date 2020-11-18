@@ -2,16 +2,20 @@ package fr.fxjavadevblog.qjg.utils;
 
 import java.time.Duration;
 
-public class DateTimeUtils {
+public final class DateTimeUtils {
+
+    private DateTimeUtils() {
+        // protecting 
+    }
 	
 	public static String format(Duration d) {
 	    long days = d.toDays();
-	    d = d.minusDays(days);
-	    long hours = d.toHours();
-	    d = d.minusHours(hours);
-	    long minutes = d.toMinutes();
-	    d = d.minusMinutes(minutes);
-	    long seconds = d.getSeconds() ;
+	    Duration d1 = d.minusDays(days);
+	    long hours = d1.toHours();
+	    Duration d2 = d1.minusHours(hours);
+	    long minutes = d2.toMinutes();
+	    Duration d3 = d2.minusMinutes(minutes);
+	    long seconds = d3.getSeconds() ;
 	    return 
 	            (days ==  0 ? "" : days  +"D ")+ 
 	            (hours == 0?"":hours+" h ")+ 

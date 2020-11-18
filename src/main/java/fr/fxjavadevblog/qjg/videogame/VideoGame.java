@@ -39,7 +39,7 @@ public class VideoGame implements Serializable
     @InjectUUID
     @Getter
     @Column(length = 36)
-    String id;
+    private String id;
 
     @Getter
     @Setter

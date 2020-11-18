@@ -10,7 +10,7 @@ import javax.enterprise.inject.spi.CDI;
  *
  */
 
-public final class VideoGameFactory
+public class VideoGameFactory
 {
     private VideoGameFactory()
     {

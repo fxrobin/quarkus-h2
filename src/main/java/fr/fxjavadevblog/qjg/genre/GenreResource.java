@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class GenreResource {
 
 	@Inject
-	VideoGameRepository videoGameRepository;
+	private VideoGameRepository videoGameRepository;
 
 	@GET
 	@Operation(summary = "returns all genres of video games on Atari ST")

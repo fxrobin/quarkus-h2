@@ -30,6 +30,6 @@ public class GenreConverterProvider implements ParamConverterProvider
     public <T> ParamConverter<T> getConverter(Class<T> rawType, Type genericType, Annotation[] annotations)
     {
         log.debug("Registering GenreConverter");
-        return (Genre.class.equals(rawType)) ? (ParamConverter<T>) converter : null;
+        return Genre.class.equals(rawType) ? (ParamConverter<T>) converter : null;
     }
 }

@@ -22,7 +22,17 @@
 		<commons-lang.version>3.11</commons-lang.version>
 
 		<surefire-plugin.version>2.22.2</surefire-plugin.version>
-	</properties>
+    </properties>
+    
+      <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.13.0</version>
+      </plugin>
+    </plugins>
+  </reporting>
 
 
 	<dependencyManagement>

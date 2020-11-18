@@ -2,7 +2,6 @@ package fr.fxjavadevblog.qjg.health;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.time.temporal.Temporal;
 
 import javax.enterprise.context.ApplicationScoped;
 
@@ -23,7 +22,7 @@ import fr.fxjavadevblog.qjg.utils.DateTimeUtils;
 @ApplicationScoped
 public class SimpleHealthCheck implements HealthCheck
 {
-	private Instant startTime = Instant.now(); 
+	private static Instant startTime = Instant.now(); 
 	
     @Override
     public HealthCheckResponse call()
