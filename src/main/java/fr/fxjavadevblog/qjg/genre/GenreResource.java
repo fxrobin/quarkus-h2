@@ -29,6 +29,10 @@ import lombok.extern.slf4j.Slf4j;
 public class GenreResource {
 
 	@Inject
+    GenreResource(VideoGameRepository videoGameRepository) {
+       this.videoGameRepository = videoGameRepository;
+    }
+
 	private VideoGameRepository videoGameRepository;
 
 	@GET
@@ -41,7 +45,7 @@ public class GenreResource {
 	@Operation(summary = "Get games within a genre", description = "Get all video games of the given genre")
 	@Path("/{genre}/video-games")
 	@Timed(name = "videogames-find-by-genre", absolute = true, description = "A measure of how long it takes to fetch all video games filtered by a given genre.", unit = MetricUnits.MILLISECONDS)
-	public List<VideoGame> findByGenre(@PathParam("genre") Genre genre) {
+	public List<VideoGame> findByGenre(@PathParam("genre") final Genre genre) {
 		log.debug("Calling {}.findByGenre : {}", this.getClass().getSimpleName(), genre);
 		return videoGameRepository.findByGenre(genre);
 	}

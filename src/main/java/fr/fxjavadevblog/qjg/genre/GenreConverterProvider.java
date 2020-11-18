@@ -22,14 +22,18 @@ import fr.fxjavadevblog.qjg.utils.GenericEnumConverter;
 @Provider
 public class GenreConverterProvider implements ParamConverterProvider
 {
-    private final Logger log = LoggerFactory.getLogger(GenreConverterProvider.class);
+    private static final Logger log = LoggerFactory.getLogger(GenreConverterProvider.class);
     private final ParamConverter<Genre> converter = GenericEnumConverter.of(Genre.class);
+
+    static
+    {
+        log.debug("Registering converter provider for Genre");
+    }
 
     @SuppressWarnings("unchecked")
     @Override
     public <T> ParamConverter<T> getConverter(Class<T> rawType, Type genericType, Annotation[] annotations)
-    {
-        log.debug("Registering GenreConverter");
+    {    
         return Genre.class.equals(rawType) ? (ParamConverter<T>) converter : null;
     }
 }

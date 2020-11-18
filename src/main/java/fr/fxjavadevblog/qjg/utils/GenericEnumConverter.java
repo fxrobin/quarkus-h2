@@ -48,15 +48,15 @@ public class GenericEnumConverter<T extends Enum<T>> implements ParamConverter<T
     
     private GenericEnumConverter(Class<T> t)
     {
-        log.debug("Generating conversion map for enum {}", t);
+        log.info("Generating conversion map for enum {}", t);
         EnumSet.allOf(t).forEach(v -> {
             try
             {
                 String enumValue = v.name();
                 JsonProperty annotation =  v.getClass().getDeclaredField(enumValue).getAnnotation(JsonProperty.class);
                 // get the annotation if exists or take the classic enum representation
-                String result = Optional.ofNullable(annotation).map(JsonProperty::value).orElse(enumValue);
-                log.debug("Enum value {}.{} is mapped to \"{}\"", t.getSimpleName(), v.name(), result);
+                String result = Optional.ofNullable(annotation).map(JsonProperty::value).orElse(enumValue.toLowerCase().replace('_', '-'));
+                log.info("{}.{} <->  \"{}\"", t.getSimpleName(), v.name(), result);
                 biMap.put(v, result);
             }
             catch (NoSuchFieldException | SecurityException e)

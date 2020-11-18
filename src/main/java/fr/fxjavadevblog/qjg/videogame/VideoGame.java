@@ -22,10 +22,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 @SuppressWarnings("serial")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = "id")
 @ToString(of = { "id", "name" })
-
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 // CDI Annotation
 @Dependent
 
@@ -34,9 +33,13 @@ import lombok.ToString;
 @Table(name = "VIDEO_GAME")
 public class VideoGame implements Serializable
 {
-    @Id
+
     @Inject
-    @InjectUUID
+    VideoGame(@InjectUUID final String id) {
+        this.id = id;
+    }
+
+    @Id
     @Getter
     @Column(length = 36)
     private String id;
